@@ -162,6 +162,7 @@ class SettingsActivity : AppCompatActivity() {
         picker: View
     ) {
         timeView.alpha = if (isEnabled) 1f else 0.4f
+        picker.alpha = if (isEnabled) 1f else 0.4f
         picker.isEnabled = isEnabled
     }
 
