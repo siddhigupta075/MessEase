@@ -16,6 +16,9 @@ import java.util.Calendar
 class SettingsActivity : AppCompatActivity() {
     private lateinit var binding:ActivitySettingsBinding
     private lateinit var mess:Mess
+
+    private val tempStates = mutableMapOf<String, Boolean>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -29,6 +32,10 @@ class SettingsActivity : AppCompatActivity() {
         setupToggle("lt_enabled", binding.switchLunch, binding.timel, binding.pickl)
         setupToggle("st_enabled", binding.switchSnacks, binding.times, binding.picks)
         setupToggle("dt_enabled", binding.switchDinner, binding.timed, binding.pickd)
+        tempStates["bt_enabled"] = mess.isMealEnabled("bt_enabled")
+        tempStates["lt_enabled"] = mess.isMealEnabled("lt_enabled")
+        tempStates["st_enabled"] = mess.isMealEnabled("st_enabled")
+        tempStates["dt_enabled"] = mess.isMealEnabled("dt_enabled")
 
     }
 
@@ -42,7 +49,12 @@ class SettingsActivity : AppCompatActivity() {
 
     fun listeners()
     {
-        val b= mutableListOf("07:30","12:0","16:30","19:0")
+        val b = mutableListOf(
+            mess.get("bt","7:30"),
+            mess.get("lt","12:0"),
+            mess.get("st","16:30"),
+            mess.get("dt","19:0")
+        )
         binding.pickb.setOnClickListener{
             showTimePicker(0, 0, 10, 0) {it,p->
                 binding.timeb.text = it
@@ -75,8 +87,13 @@ class SettingsActivity : AppCompatActivity() {
             mess.save("st",b[2])
             mess.save("dt",b[3])
             mess.log(b)
-            mess.toast("Timings Updated")
             //cancelAllAlarms(this@SettingsActivity)
+            mess.setMealEnabled("bt_enabled", tempStates["bt_enabled"]!!)
+            mess.setMealEnabled("lt_enabled", tempStates["lt_enabled"]!!)
+            mess.setMealEnabled("st_enabled", tempStates["st_enabled"]!!)
+            mess.setMealEnabled("dt_enabled", tempStates["dt_enabled"]!!)
+
+            mess.toast("Settings Updated")
             finish()
         }
 
@@ -151,7 +168,7 @@ class SettingsActivity : AppCompatActivity() {
         updateUIState(isEnabled, timeView, picker)
 
         switch.setOnCheckedChangeListener { _, checked ->
-            mess.setMealEnabled(key, checked)
+            tempStates[key] = checked
             updateUIState(checked, timeView, picker)
         }
     }

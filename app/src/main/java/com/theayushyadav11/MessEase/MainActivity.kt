@@ -375,10 +375,13 @@ class MainActivity : AppCompatActivity() {
             )
 
             for (i in times.indices) {
+                cancelAllAlarms(this, i)
+            }
+
+
+            for (i in times.indices) {
                 if (enabledStates[i]) {
                     scheduleAlarm(i, times[i], intent)
-                } else {
-                    cancelAllAlarms(this, i)
                 }
             }
         } catch (e: Exception) {
