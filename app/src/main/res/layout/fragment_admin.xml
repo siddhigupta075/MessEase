@@ -80,7 +80,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="25dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="50dp"
 
                 android:backgroundTint="#CCFFFFFF"
                 app:strokeColor="#40FFFFFF"
@@ -94,6 +94,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
+
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_card_glass_inner"
                     android:padding="22dp">
@@ -108,33 +109,33 @@
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <!-- EMAIL -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/tilEmail"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        app:boxStrokeWidth="1.5dp"
-
                         android:layout_width="0dp"
+
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
-
                         android:hint="Email Address"
 
-                        app:boxStrokeColor="@color/food"
-                        app:boxStrokeWidthFocused="3dp"
+                        app:boxCornerRadiusBottomEnd="18dp"
+
+                        app:boxCornerRadiusBottomStart="18dp"
+                        app:boxCornerRadiusTopEnd="18dp"
 
                         app:boxCornerRadiusTopStart="18dp"
-                        app:boxCornerRadiusTopEnd="18dp"
-                        app:boxCornerRadiusBottomStart="18dp"
-                        app:boxCornerRadiusBottomEnd="18dp"
+                        app:boxStrokeColor="@color/food"
+                        app:boxStrokeWidth="1.5dp"
+                        app:boxStrokeWidthFocused="3dp"
 
                         app:endIconMode="clear_text"
 
-                        app:layout_constraintTop_toBottomOf="@id/tvFormTitle"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent">
+                        app:layout_constraintTop_toBottomOf="@id/tvFormTitle">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etEmail"
@@ -144,12 +145,12 @@
                             android:drawableStart="@drawable/baseline_attach_email_24"
                             android:drawablePadding="12dp"
 
+                            android:inputType="textEmailAddress"
                             android:paddingStart="12dp"
-                            android:paddingEnd="12dp"
 
+                            android:paddingEnd="12dp"
                             android:textColor="@color/black"
-                            android:textColorHint="#80AAAAAA"
-                            android:inputType="textEmailAddress"/>
+                            android:textColorHint="#80AAAAAA" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -164,21 +165,21 @@
 
                         android:hint="Designation"
 
+                        app:boxCornerRadiusBottomEnd="18dp"
+                        app:boxCornerRadiusBottomStart="18dp"
+
+                        app:boxCornerRadiusTopEnd="18dp"
+                        app:boxCornerRadiusTopStart="18dp"
                         app:boxStrokeColor="@color/food"
+                        app:boxStrokeWidth="1.5dp"
+
+
                         app:boxStrokeWidthFocused="3dp"
 
-                        app:boxCornerRadiusTopStart="18dp"
-                        app:boxCornerRadiusTopEnd="18dp"
-                        app:boxCornerRadiusBottomStart="18dp"
-                        app:boxCornerRadiusBottomEnd="18dp"
-
-
                         app:endIconMode="dropdown_menu"
-
-                        app:layout_constraintTop_toBottomOf="@id/tilEmail"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:boxStrokeWidth="1.5dp"
-                        app:layout_constraintEnd_toEndOf="parent">
+                        app:layout_constraintTop_toBottomOf="@id/tilEmail">
 
                         <AutoCompleteTextView
                             android:id="@+id/spinnerAutoComplete"
@@ -188,12 +189,12 @@
                             android:drawableStart="@drawable/baseline_person_24"
                             android:drawablePadding="12dp"
 
+                            android:inputType="none"
                             android:paddingStart="12dp"
-                            android:paddingEnd="12dp"
 
+                            android:paddingEnd="12dp"
                             android:textColor="@color/black"
-                            android:textColorHint="#80AAAAAA"
-                            android:inputType="none"/>
+                            android:textColorHint="#80AAAAAA" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -204,11 +205,11 @@
             <!-- BUTTON -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAdd"
-                android:letterSpacing="0.03"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_marginHorizontal="25dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="80dp"
+                android:letterSpacing="0.03"
 
                 android:text="Add to Committee"
                 android:textColor="@color/white"
@@ -222,9 +223,9 @@
                 app:iconPadding="10dp"
                 app:iconTint="@color/white"
 
-                app:layout_constraintTop_toBottomOf="@id/cardView"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@id/cardView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
