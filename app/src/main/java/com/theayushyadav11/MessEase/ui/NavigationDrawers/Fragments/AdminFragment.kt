@@ -69,21 +69,21 @@ class AdminFragment : Fragment() {
     }
 
     private fun add(email: String, designation: String) {
-        // Disable button to avoid spam clicking
-        binding.btnAdd.isEnabled = false
-        binding.btnAdd.text = "Adding..."
+        _binding?.let { binding ->
+            binding.btnAdd.isEnabled = false
+            binding.btnAdd.text = "Adding..."
+        }
 
         mess.addPb("Adding to Mess Committee")
 
-        viewModel.addToMessCommittee(email, designation) {
+        viewModel.addToMessCommittee(email, designation) { result ->
+            val binding = _binding ?: return@addToMessCommittee
             mess.pbDismiss()
 
             binding.btnAdd.isEnabled = true
             binding.btnAdd.text = "Add to Committee"
 
-            mess.toast(it)
-
-            // Clear fields after success
+            mess.toast(result)
             binding.etEmail.text?.clear()
             binding.spinnerAutoComplete.text?.clear()
         }
