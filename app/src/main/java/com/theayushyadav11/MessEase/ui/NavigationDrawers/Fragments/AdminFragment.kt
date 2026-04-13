@@ -46,25 +46,25 @@ class AdminFragment : Fragment() {
     private fun validateAndAdd() {
         val email = binding.etEmail.text.toString().trim()
         val designation = binding.spinnerAutoComplete.text.toString().trim()
+        binding.tilEmail.error = null
+        binding.tilspin.error = null
 
-        when {
-            email.isEmpty() -> {
-                binding.tilEmail.error = "Email required"
-            }
+        var isValid = true
+        if (email.isEmpty()) {
+            binding.tilEmail.error = "Email required"
+            isValid = false
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.tilEmail.error = "Invalid email"
+            isValid = false
+        }
 
-            !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
-                binding.tilEmail.error = "Invalid email"
-            }
+        if (designation.isEmpty()) {
+            binding.tilspin.error = "Select designation"
+            isValid = false
+        }
 
-            designation.isEmpty() -> {
-                binding.tilspin.error = "Select designation"
-            }
-
-            else -> {
-                binding.tilEmail.error = null
-                binding.tilspin.error = null
-                add(email, designation)
-            }
+        if (isValid) {
+            add(email, designation)
         }
     }
 
