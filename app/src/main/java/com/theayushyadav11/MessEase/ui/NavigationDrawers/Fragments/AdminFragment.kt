@@ -77,26 +77,32 @@ class AdminFragment : Fragment() {
         mess.addPb("Adding to Mess Committee")
 
         viewModel.addToMessCommittee(email, designation) { result ->
-            val binding = _binding ?: return@addToMessCommittee
             mess.pbDismiss()
+            val binding = _binding
+            if (binding != null) {
+                binding.btnAdd.isEnabled = true
+                binding.btnAdd.text = "Add to Committee"
 
-            binding.btnAdd.isEnabled = true
-            binding.btnAdd.text = "Add to Committee"
-
+            }
             mess.toast(result)
-            binding.etEmail.text?.clear()
-            binding.spinnerAutoComplete.text?.clear()
+            if (result.contains("success", ignoreCase = true)) {
+                binding?.etEmail?.text?.clear()
+                binding?.spinnerAutoComplete?.text?.clear()
+            }
         }
     }
 
     private fun setAdapter() {
-        mess.getLists("${DESIGNATION}s") {
+        mess.getLists("${DESIGNATION}s") {list ->
+            if (!isAdded || context == null) return@getLists
+            val b = _binding ?: return@getLists
+            val ctx = context ?: return@getLists
             val adapter = ArrayAdapter(
-                requireContext(),
+                ctx,
                 android.R.layout.simple_dropdown_item_1line,
-                it
+                list
             )
-            binding.spinnerAutoComplete.setAdapter(adapter)
+            b.spinnerAutoComplete.setAdapter(adapter)
         }
     }
 
